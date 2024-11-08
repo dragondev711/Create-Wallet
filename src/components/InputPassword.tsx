@@ -57,8 +57,8 @@ const InputPassword: React.FC<props> = ({ setPassword, setMatchPassword }) => {
     }, [confirmPassword, tempPassword]);
 
     return (
-        <div className="flex flex-col justify-center items-center gap-2">
-            <div className="my-2 flex flex-col gap-2 rounded-lg bg-[#44444444] w-full px-2 py-1">
+        <div className="flex flex-col justify-center items-center gap-1">
+            <div className="my-2 flex flex-col gap-2 rounded-lg bg-[#44444444] w-full px-2">
                 <div>Input your Password</div>
                 <div className="flex flex-row justify-between items-center">
                     <input
@@ -66,9 +66,9 @@ const InputPassword: React.FC<props> = ({ setPassword, setMatchPassword }) => {
                         value={tempPassword}
                         onChange={(e) => { evaluatePassword(false, e.target.value) }}
                         placeholder="Input your password"
-                        className="w-[200px] border-0 px-3 py-1 rounded-lg text-[15px]"
+                        className="w-[230px] border-0 px-3 py-1 rounded-lg text-[15px]"
                     />
-                    <div onClick={() => setHidden(!hidden)}>
+                    <div className="cursor-pointer" title={hidden?"Show":"Hidden"} onClick={() => setHidden(!hidden)}>
                     
                         {hidden ?
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -95,7 +95,7 @@ const InputPassword: React.FC<props> = ({ setPassword, setMatchPassword }) => {
                         })
                     }
                 </div>
-                <div className="text-[13px]">{degree[passowrdStrength]}</div>
+                <div className="text-[13px] h-[16px]">{degree[passowrdStrength]}</div>
             </div>
 
             <div className="my-2 flex flex-col gap-2 rounded-lg bg-[#44444444] w-full px-2 py-1">
@@ -106,9 +106,9 @@ const InputPassword: React.FC<props> = ({ setPassword, setMatchPassword }) => {
                         value={confirmPassword}
                         onChange={async (e) => { evaluatePassword(true, e.target.value)}}
                         placeholder="Input your confirm password"
-                        className="w-[200px] border-0 px-3 py-1 rounded-lg text-[15px]"
+                        className="w-[230px] border-0 px-3 py-1 rounded-lg text-[15px]"
                     />
-                    <div onClick={() => setHiddenConfirm(!hiddenConfirm)}>
+                    <div className="cursor-pointer" title={hiddenConfirm?"Show":"Hidden"} onClick={() => setHiddenConfirm(!hiddenConfirm)}>
                         {hiddenConfirm ?
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
