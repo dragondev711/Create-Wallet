@@ -4,20 +4,20 @@ const degree = ["Very Weak", "Weak", "Fair", "Good", "Excellent", "Outstanding"]
 
 interface props {
     inputName: string,
-    password: string,
     setPassword: React.Dispatch<React.SetStateAction<string>>,
     setMatchPassword: React.Dispatch<React.SetStateAction<Boolean>>,
 }
-const InputPassword: React.FC<props> = ({ password, setPassword, setMatchPassword }) => {
+const InputPassword: React.FC<props> = ({ setPassword, setMatchPassword }) => {
     const [hiddenConfirm, setHiddenConfirm] = useState<Boolean>(true);
     const [hidden, setHidden] = useState<Boolean>(true);
-    const [passowrdStrength, setPasswordStrength] = useState<Number>(-1);
+    const [passowrdStrength, setPasswordStrength] = useState<number>(-1);
     const [confirmPassword, setConfirmPassword] = useState<string>("");
+    const [tempPassword, setTempPassword] = useState<string>("");
 
     const evaluatePassword = (isConfirmPassword: Boolean, text: string): void => {
         console.log(text);
         
-        !isConfirmPassword?setPassword(text):setConfirmPassword(text);
+        !isConfirmPassword?setTempPassword(text):setConfirmPassword(text);
         setPasswordStrength(0);
 
         if (!text) setPasswordStrength(-1);
@@ -48,12 +48,13 @@ const InputPassword: React.FC<props> = ({ password, setPassword, setMatchPasswor
         setMatchPassword(false);
         if (password.length > 8 && password === confirmPassword && password != "" && passowrdStrength >= 3) {
             setMatchPassword(true);
+            setPassword(tempPassword);
         }
     }
 
     useEffect(() => {
-        isMatchedPassword(password, confirmPassword);
-    }, [confirmPassword, password])
+        isMatchedPassword(tempPassword, confirmPassword);
+    }, [confirmPassword, tempPassword]);
 
     return (
         <div className="flex flex-col justify-center items-center gap-2">
@@ -62,7 +63,7 @@ const InputPassword: React.FC<props> = ({ password, setPassword, setMatchPasswor
                 <div className="flex flex-row justify-between items-center">
                     <input
                         type={`${hidden ? "password" : "text"}`}
-                        value={password}
+                        value={tempPassword}
                         onChange={(e) => { evaluatePassword(false, e.target.value) }}
                         placeholder="Input your password"
                         className="w-[200px] border-0 px-3 py-1 rounded-lg text-[15px]"
